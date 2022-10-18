@@ -1,6 +1,4 @@
-def window(text, l):
-  for i in range(0, len(text)-l+1):
-    yield text[i:i+l]
+from tools import window
 
 def pattern_count(text, pattern):
   return sum(found == pattern for found in window(text, len(pattern)))
@@ -31,7 +29,8 @@ def better_frequent_words(text, k):
   return frequent_patterns
 
 def reverse_complement(pattern):
-  return pattern[::-1]
+  mapping = {'A':'T', 'T':'A', 'G':'C', 'G':'C'}
+  return ''.join([mapping[i] for i in pattern[::-1]])
 
 def pattern_match(pattern, genome):
   return [genome.index(p) for p in window(genome, len(pattern)) if p == pattern]
