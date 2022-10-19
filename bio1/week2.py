@@ -15,7 +15,7 @@ def min_skew(pattern):
   skew_list = skew(pattern)
   return [i for i in range(len(pattern)) if skew_list[i] == min(skew_list)]
 
-def hamming_distance(pattern1, pattern2):
+def hamming_distance(pattern1: str, pattern2: str):
   count = 0
   for a, b in zip(pattern1, pattern2):
     count = count if a == b else count + 1
