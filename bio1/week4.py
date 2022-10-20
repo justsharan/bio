@@ -11,6 +11,7 @@ def motifs(profile_matrix: np.ndarray, dna: list[str]) -> np.ndarray:
   return np.array([list(i) for i in res])
 
 def randomized_motif_search(dna: list[str], k: int, t: int):
+  # Generate a random k-mer for each strand in dna
   _motifs = np.array([list(random.choice(list(itertools.islice(window(strand, k), t)))) for strand in dna])
   best_motifs = np.copy(_motifs)
   while True:
