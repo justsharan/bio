@@ -13,7 +13,7 @@ def motif_enumeration(dna: str, k: int, d: int):
       patterns.add(combo)
   return patterns
 
-def count(motifs: np.ndarray):
+def count(motifs: np.ndarray) -> np.ndarray:
   res = np.zeros((4, motifs.shape[1]), dtype=np.int32)
   for i, el in enumerate('ACGT'):
     res[i,:] = (motifs==el).sum(axis=0)
@@ -23,12 +23,12 @@ def profile(motifs: np.ndarray, pseudocount=0):
   res = count(motifs) + pseudocount
   return res / res.sum(axis=0)
 
-def score(motifs: np.ndarray):
+def score(motifs: np.ndarray) -> int:
   res = count(motifs)
   scores = res.sum(axis=0) - res.max(axis=0)
   return scores.sum()
 
-def entropy(col: np.ndarray):
+def entropy(col: np.ndarray) -> float:
   col = col[col != 0]
   return (-col * np.log2(col)).sum()
 
@@ -39,7 +39,7 @@ def d(pattern: str, dna: list[str]):
     hd_sum += min(distances)
   return hd_sum
 
-def median_string(dna: list[str], k: int):
+def median_string(dna: list[str], k: int) -> tuple[str, int]:
   (min_kmer, min_d) = ('', np.inf)
   for kmer in window(''.join(dna), k):
     hd = d(kmer, dna)
@@ -47,7 +47,7 @@ def median_string(dna: list[str], k: int):
       (min_kmer, min_d) = (kmer, hd)
   return (min_kmer, min_d)
 
-def profile_prob(profile_matrix: np.ndarray, kmer: str) -> int:
+def profile_prob(profile_matrix: np.ndarray, kmer: str) -> float:
   prob = 1
   for i, s in enumerate(kmer):
     prob *= profile_matrix['ACGT'.index(s),i]
@@ -57,7 +57,7 @@ def profitable_kmer(text: str, k: int, profile_matrix: np.ndarray) -> str:
   profits = {kmer: profile_prob(profile_matrix, kmer) for kmer in window(text, k)}
   return max(profits, key=profits.get)
 
-def greedy_motif_search(dna: list[str], k: int, t: int):
+def greedy_motif_search(dna: list[str], k: int, t: int) -> np.ndarray:
   best_motifs = np.array([list(strand[0:k]) for strand in dna])
   for kmer in window(dna[0], k): # only go through kmers in first strand
     motifs = np.array([list(kmer)])
