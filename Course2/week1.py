@@ -1,6 +1,4 @@
-def window(text: str, l: int):
-  for i in range(0, len(text)-l+1):
-    yield text[i:i+l]
+from helpers import window
 
 def composition(text: str, k: int) -> list[str]:
   return list(window(text, k))

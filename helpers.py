@@ -40,6 +40,6 @@ def translate(sequence: str) -> str:
     """Translate an RNA sequence to a peptide sequence using the standard codon table"""
     return ''.join(CODON_TABLE[codon] for codon in chunks(sequence))
 
-def DNA_to_protein(sequence: str) -> str:
+def DNA_to_peptide(sequence: str) -> str:
     """Transcribe and translate a DNA sequence to a peptide"""
     return translate(transcribe(sequence))
