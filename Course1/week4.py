@@ -1,7 +1,7 @@
 import itertools
 import numpy as np
 import random
-from tools import window
+from helpers import window
 from week3 import profile, profile_prob, profitable_kmer, score
 
 def motifs(profile_matrix: np.ndarray, dna: list[str]) -> np.ndarray:

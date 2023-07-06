@@ -1,4 +1,4 @@
-from tools import window
+from helpers import window
 
 def skew(pattern):
   count = 0
@@ -55,4 +55,3 @@ def freq_words_mismatches(text, k, d):
     for neighbor in immediate_neighbors(pattern, d):
       freq_map[neighbor] = freq_map[neighbor]+1 if neighbor in freq_map else 1
   return [k for k, v in freq_map.items() if v == max(freq_map.values())]
-

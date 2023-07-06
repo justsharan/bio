@@ -1,5 +1,5 @@
 from itertools import product
-from tools import window
+from helpers import window
 from week2 import hamming_distance
 import numpy as np
 
