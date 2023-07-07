@@ -7,12 +7,10 @@ NUCLEOTIDE_PAIRS = {
     'C': 'G'
 }
 
-# Parse RNA codon table
 CODON_TABLE = {}
-with open('RNA_codon_table.txt', 'r') as file:
-    for line in file:
-        items = line.strip().split()
-        CODON_TABLE[items[0]] = items[1] if len(items) == 2 else ''
+with open('RNA_codon_table.txt', 'r') as f:
+    items = [line.strip().split() for line in f]
+    CODON_TABLE = { item[0]: item[1] for item in items }
 
 def window(sequence: str, l: int) -> Generator[str, None, None]:
     """Create a sliding window for `sequence` of length `l`"""
